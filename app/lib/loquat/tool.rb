@@ -7,7 +7,10 @@ module Loquat
     end
 
     def exec(args = {})
-      raise Ginseng::ImplementError, "'#{__method__}' not implemented"
+      @keyword = args.first
+      dest = entries.reject {|id, _| prev.member?(id)}.transform_values(&:to_yaml)
+      save
+      return dest.values.join
     end
 
     def uri
@@ -23,7 +26,7 @@ module Loquat
     end
 
     def save
-      File.write(path, @entries.to_json)
+      File.write(path, entries.to_json)
     end
 
     def load
@@ -37,6 +40,15 @@ module Loquat
 
     def help
       return ["-- #{self.class} のヘルプは未定義 --"]
+    end
+
+    def self.create_entry(row)
+      return {
+        '題名' => row['name'].gsub(/\R/, "\n"),
+        '開始' => row['startAt'].to_time.strftime('%m/%d %H:%M'),
+        '終了' => row['endAt'].to_time.strftime('%m/%d %H:%M'),
+        '概要' => row['description']&.gsub(/\R/, "\n"),
+      }.compact.reject {|_k, v| v.is_a?(String) && v.match?(/^[[:blank:]]+$/)}
     end
 
     def self.create(name)
