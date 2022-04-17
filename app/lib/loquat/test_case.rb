@@ -29,7 +29,6 @@ module Loquat
       else
         names = Dir.glob(File.join(dir, '*.rb')).map {|v| File.basename(v, '.rb')}
       end
-      TestCaseFilter.all.select(&:active?).each {|v| v.exec(names)}
       return names.to_set
     end
 
