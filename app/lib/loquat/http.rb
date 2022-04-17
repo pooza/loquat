@@ -10,7 +10,8 @@ module Loquat
       end
       return response
     rescue Ginseng::GatewayError => e
-      if params[:mock] && Environment.ci? && File.exist?(path)
+      if params[:mock] && Environment.ci?
+        path = self.class.create_mock_path(uri, params)
         mock = Marshal.load(File.read(path)) # rubocop:disable Security/MarshalLoad
         warn "load mock: #{mock.class} #{File.basename(path)}"
         return mock
