@@ -11,6 +11,9 @@ module Loquat
 
     def test_fetch
       assert_kind_of(Array, @tool.fetch)
+      @tool.fetch.first(5).each do |entry|
+        assert_kind_of(Hash, entry)
+      end
     end
 
     def test_entries

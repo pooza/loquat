@@ -8,9 +8,6 @@ module Loquat
 
     def fetch
       return JSON.parse(@http.get(uri).body)['reserves']
-    rescue => e
-      logger.eror(error: e)
-      return {}
     end
 
     def entries

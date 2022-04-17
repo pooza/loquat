@@ -8,7 +8,7 @@ module Loquat
     end
 
     def exec(args = {})
-      keyword = args.first
+      @keyword = args.first
       dest = entries.reject {|id, _| prev.member?(id)}.transform_values(&:to_yaml)
       save
       return dest.values.join
