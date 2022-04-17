@@ -1,13 +1,14 @@
 module Loquat
   class Tool
     include Package
+    attr_accessor :keyword
 
     def initialize
       @http = HTTP.new
     end
 
     def exec(args = {})
-      @keyword = args.first
+      keyword = args.first
       dest = entries.reject {|id, _| prev.member?(id)}.transform_values(&:to_yaml)
       save
       return dest.values.join

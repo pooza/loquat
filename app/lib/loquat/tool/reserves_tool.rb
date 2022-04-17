@@ -14,13 +14,13 @@ module Loquat
     end
 
     def entries
-      return fetch.select {|v| v.to_json.match?(@keyword)}.to_h do |row|
+      return fetch.select {|v| v.to_json.match?(keyword)}.to_h do |row|
         [row.to_json.adler32, self.class.create_entry(row)]
       end
     end
 
     def path
-      return File.join(Environment.dir, 'tmp/cache', "reserves-#{@keyword.adler32}.json")
+      return File.join(Environment.dir, 'tmp/cache', "reserves-#{keyword.adler32}.json")
     end
 
     def help
