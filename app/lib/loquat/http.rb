@@ -19,7 +19,7 @@ module Loquat
     def self.create_mock_path(uri, params = {})
       return File.join(
         Environment.dir,
-        'tmp/mock/http',
+        'test/mock/http',
         params.merge(uri_path: uri.path).to_json.adler32,
       )
     end
