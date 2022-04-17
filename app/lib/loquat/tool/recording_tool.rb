@@ -7,7 +7,7 @@ module Loquat
     end
 
     def fetch
-      return JSON.parse(@http.get(uri).body)['records']
+      return JSON.parse(@http.get(uri, {mockable: true}).body)['records']
     end
 
     def entries

@@ -5,12 +5,12 @@ module Loquat
     def get(uri, params = {})
       path = self.class.create_mock_path(uri, params)
       response = super
-      if Environment.development? && Environment.test? && !File.exist?(path)
+      if params[:mockable] && Environment.development? && Environment.test? && !File.exist?(path)
         File.write(path, Marshal.dump(response))
       end
       return response
     rescue Ginseng::GatewayError => e
-      if Environment.ci? && File.exist?(path)
+      if params[:mockable] && Environment.ci? && File.exist?(path)
         mock = Marshal.load(File.read(path)) # rubocop:disable Security/MarshalLoad
         warn "load mock: #{mock.class} #{File.basename(path)}"
         return mock
