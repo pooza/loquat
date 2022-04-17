@@ -5,7 +5,9 @@ module Loquat
     def get(uri, params = {})
       path = self.class.create_mock_path(uri, params)
       response = super
-      File.write(path, Marshal.dump(response)) unless File.exist?(path)
+      if Environment.development? && Environment.test? && !File.exist?(path)
+        File.write(path, Marshal.dump(response))
+      end
       return response
     rescue Ginseng::GatewayError => e
       if Environment.ci? && File.exist?(path)
