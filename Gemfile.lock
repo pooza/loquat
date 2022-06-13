@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/pooza/ginseng-core.git
-  revision: 041536a66d5e7367dd3e6661173900f3f18b2af2
+  revision: 11414273cbc19349212f46d6dc48e15445ab29f4
   specs:
-    ginseng-core (1.13.1)
+    ginseng-core (1.13.6)
       activesupport (>= 6.1.3.2)
       addressable (>= 2.8.0)
       bundler (~> 2.0)
@@ -20,7 +20,7 @@ GIT
       multi_json
       net-protocol
       net-smtp
-      nokogiri (>= 1.13.4)
+      nokogiri (>= 1.13.6)
       optparse
       rake
       rest-client
@@ -28,14 +28,14 @@ GIT
       securerandom
       set
       time
-      yajl-ruby (>= 1.4.2)
+      yajl-ruby (>= 1.4.3)
       zeitwerk (>= 2.4.0)
       zlib
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.2.3)
+    activesupport (7.0.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -59,15 +59,15 @@ GEM
     fileutils (1.6.0)
     find (0.1.1)
     http-accept (1.7.0)
-    http-cookie (1.0.4)
+    http-cookie (1.0.5)
       domain_name (~> 0.5)
     httparty (0.20.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
-    json-schema (2.8.1)
-      addressable (>= 2.4)
+    json-schema (3.0.0)
+      addressable (>= 2.8)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     mime-types (3.4.1)
@@ -85,7 +85,7 @@ GEM
       net-protocol
       timeout
     netrc (0.11.0)
-    nokogiri (1.13.4)
+    nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     optparse (0.2.0)
@@ -97,7 +97,7 @@ GEM
     racc (1.6.0)
     rainbow (3.1.1)
     rake (13.0.6)
-    regexp_parser (2.3.0)
+    regexp_parser (2.5.0)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -111,20 +111,20 @@ GEM
       netrc (~> 0.8)
     rexml (3.2.5)
     ricecream (0.2.1)
-    rubocop (1.27.0)
+    rubocop (1.30.1)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
-      rexml
-      rubocop-ast (>= 1.16.0, < 2.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.18.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.17.0)
+    rubocop-ast (1.18.0)
       parser (>= 3.1.1.0)
-    rubocop-minitest (0.19.1)
+    rubocop-minitest (0.20.1)
       rubocop (>= 0.90, < 2.0)
-    rubocop-performance (1.13.3)
+    rubocop-performance (1.14.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     rubocop-rake (0.6.0)
@@ -140,15 +140,15 @@ GEM
     time (0.2.0)
       date
     timecop (0.9.5)
-    timeout (0.2.0)
+    timeout (0.3.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.8.1)
+    unf_ext (0.0.8.2)
     unicode-display_width (2.1.0)
-    yajl-ruby (1.4.2)
-    zeitwerk (2.5.4)
+    yajl-ruby (1.4.3)
+    zeitwerk (2.6.0)
     zlib (2.1.1)
 
 PLATFORMS
@@ -171,4 +171,4 @@ RUBY VERSION
    ruby 3.1.1p18
 
 BUNDLED WITH
-   2.3.11
+   2.3.15
