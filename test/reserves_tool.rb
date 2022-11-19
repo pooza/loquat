@@ -2,7 +2,7 @@ module Loquat
   class ReservesToolTest < TestCase
     def setup
       @tool = Tool.create('reserves')
-      @tool.exec(['プリキュア'])
+      @tool.exec(['reserves', 'プリキュア'])
     end
 
     def test_uri

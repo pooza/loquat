@@ -2,7 +2,7 @@ module Loquat
   class RecordingToolTest < TestCase
     def setup
       @tool = Tool.create('recording')
-      @tool.exec([])
+      @tool.exec(['recording'])
     end
 
     def test_uri

@@ -1,3 +1,5 @@
+require 'optparse'
+
 module Loquat
   class Tool
     include Package
@@ -7,11 +9,13 @@ module Loquat
       @http = HTTP.new
     end
 
-    def exec(args = {})
-      @keyword = args.first
-      dest = entries.reject {|id, _| prev.member?(id)}.transform_values(&:to_yaml)
-      save
-      return dest.values.join
+    def exec(args = [])
+      args.shift if args.present?
+      @keyword = args.shift if args.present?
+      @options = args.getopts('n') rescue {}
+      dest = entries.reject {|id, _| prev.member?(id)}.values.map {|v| v.join("\n")}
+      save if save?
+      return dest.join("\n---\n")
     end
 
     def uri
@@ -20,6 +24,10 @@ module Loquat
 
     def fetch
       raise Ginseng::ImplementError, "'#{__method__}' not implemented"
+    end
+
+    def save?
+      return @options['n'] != true
     end
 
     def path
@@ -44,12 +52,17 @@ module Loquat
     end
 
     def self.create_entry(row)
-      return {
-        '題名' => row['name'].gsub(/\R/, "\n"),
-        '開始' => row['startAt'].to_time.strftime('%m/%d %H:%M'),
-        '終了' => row['endAt'].to_time.strftime('%m/%d %H:%M'),
-        '概要' => row['description']&.gsub(/\R/, "\n"),
-      }.compact.reject {|_k, v| v.is_a?(String) && v.match?(/^[[:blank:]]+$/)}
+      row = {
+        name: row['name'].gsub(/\R/, "\n"),
+        start: row['startAt'].to_time.strftime('%m/%d %H:%M'),
+        end: row['endAt'].to_time.strftime('%H:%M'),
+        description: row['description']&.gsub(/\R/, "\n"),
+      }
+      return [
+        row[:name],
+        "#{row[:start]} 〜 #{row[:end]}",
+        row[:description],
+      ].compact.reject {|v| v.is_a?(String) && v.match?(/^[[:blank:]]+$/)}
     end
 
     def self.create(name)
