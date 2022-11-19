@@ -1,3 +1,5 @@
+require 'optparse'
+
 module Loquat
   class Tool
     include Package
@@ -7,10 +9,12 @@ module Loquat
       @http = HTTP.new
     end
 
-    def exec(args = {})
-      @keyword = args.first
+    def exec(args = [])
+      args.shift if args.present?
+      @keyword = args.shift if args.present?
+      @options = args.getopts('n') rescue {}
       dest = entries.reject {|id, _| prev.member?(id)}.values.map {|v| v.join("\n")}
-      save
+      save if save?
       return dest.join("\n---\n")
     end
 
@@ -20,6 +24,10 @@ module Loquat
 
     def fetch
       raise Ginseng::ImplementError, "'#{__method__}' not implemented"
+    end
+
+    def save?
+      return @options['n'] != true
     end
 
     def path
