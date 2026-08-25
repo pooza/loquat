@@ -3,6 +3,7 @@ require 'optparse'
 module Loquat
   class Tool
     include Package
+
     attr_accessor :keyword
 
     def initialize
